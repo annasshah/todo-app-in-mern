@@ -34,7 +34,7 @@ const signUp = async (req, res) => {
     }
 
     const auth_token = jwt.sign(data, AUTH_TOKEN_SECRET_KEY)
-    
+
     return res.json({ success: true, message: 'User successfuly created!', token: auth_token })
 
 }
@@ -55,9 +55,9 @@ const login = async (req, res) => {
         return res.status(409).json({ success: false, message: 'Please login with correct credential' })
     }
 
-    const compare_password = await bcrypt.compare(password,find_user.password)
+    const compare_password = await bcrypt.compare(password, find_user.password)
 
-    if(!compare_password){
+    if (!compare_password) {
         return res.status(401).json({
             success: false,
             message: 'Please try to login with correct credentials!'
@@ -76,9 +76,9 @@ const login = async (req, res) => {
 
     const auth_token = jwt.sign(data, AUTH_TOKEN_SECRET_KEY)
 
-    res.cookie('token',auth_token)
+    // await res.cookie('token', auth_token,{ httpOnly: true })
 
-    return res.json({ success: true,data:user_data, message: 'Logged in successfuly!'})
+    return res.json({ success: true, data: user_data, message: 'Logged in successfuly!', token:auth_token })
 
 }
 

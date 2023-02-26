@@ -2,20 +2,23 @@ const jwt = require('jsonwebtoken')
 
 const { AUTH_TOKEN_SECRET_KEY } = process.env
 
-const check_auth = async (req, res,next) => {
-    const cookies_data = req.cookies.token
+const check_auth = async (req, res, next) => {
+    const { authorization } = req.headers
 
-    if(!cookies_data){
-        return res.json({ success: false, message: 'Unauthorize user'}).status(402)
+
+    if (!authorization) {
+        return res.json({ success: false, message: 'Unauthorize user' }).status(402)
+
     }
-    
-    const verify_token = jwt.verify(cookies_data, AUTH_TOKEN_SECRET_KEY )
-    
-    if(!verify_token){
-        return res.json({ success: false, message: 'Unauthorize user'}).status(402)
+    const token = authorization.split(' ')[1]
+
+    const verify_token = jwt.verify(token, AUTH_TOKEN_SECRET_KEY)
+
+    if (!verify_token) {
+        return res.json({ success: false, message: 'Unauthorize user' }).status(402)
     }
 
-    const {id} = verify_token
+    const { id } = verify_token
 
     req.user_id = id
 
@@ -24,4 +27,4 @@ const check_auth = async (req, res,next) => {
 }
 
 
-module.exports = {check_auth}
+module.exports = { check_auth }

@@ -14,9 +14,16 @@ connectToMongo()
 const app = express()
 const port = process.env.PORT || 6000
 
-app.use(cookieParser())
 app.use(express.json())
-app.use(cors())
+app.use(cookieParser())
+
+
+// app.use(cookieParser(config.cookieSecret));
+// app.use(express.static(path.resolve(__basedir, 'static')));
+app.use(cors({
+  origin: ['http://localhost:3000'],
+  credentials: true
+}))
 
 
 // app.get('/check', async(req, res)=> {
