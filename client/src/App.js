@@ -39,7 +39,7 @@ const App = () => {
 
   if (initial_auth_check_status === async_status.SUCCEEDED) {
 
-    return <Login />
+    return <RouterApp />
   }
 
 

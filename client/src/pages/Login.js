@@ -19,7 +19,7 @@ export const Login = () => {
 
   const [form_data, setForm_data] = useState({})
 
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const submit_handle = (e) => {
@@ -78,7 +78,7 @@ export const Login = () => {
         <Stack direction='row' justifyContent='center' alignItems='start'  >
           <Typography sx={{ marginRight: 0.7 }} >Don't have account </Typography>
           <button 
-          // onClick={() => navigate('/signup')}
+          onClick={() => navigate('/signup')}
            style={{ marginLeft: '10px', all: 'unset', textTransform: 'none', textDecoration: 'underline', color: primary_color, pointerEvents: 'all', cursor: 'pointer' }}> Create account</button>
         </Stack>
       </>

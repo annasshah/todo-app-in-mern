@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { check_user_auth_async, user_login_async } from '../../services/auth_service'
-import { async_status } from '../../utils/contants'
+import { async_status, user_auth_token } from '../../utils/contants'
 
 const initialState = {
     initial_auth_check_status: async_status.IDLE,
@@ -64,13 +64,12 @@ const user_auth_slice = createSlice({
             state.login_status = async_status.SUCCEEDED
             state.user_data = payload.data
             state.login_error = null
+
+            localStorage.setItem(user_auth_token, payload.token)
         })
 
-        builder.addCase(user_login_async.rejected, (state, actions) => {
-            if (actions.payload.success === false) {
-                state.user_auth = false
-            }
-            state.login_error = actions.error
+        builder.addCase(user_login_async.rejected, (state, {payload, error}) => {
+            state.login_error = error
             state.login_status = async_status.ERROR
         })
     }

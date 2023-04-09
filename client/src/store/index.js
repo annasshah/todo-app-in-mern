@@ -2,13 +2,12 @@ import { applyMiddleware, combineReducers, compose, configureStore } from '@redu
 import thunk from 'redux-thunk';
 import { type_constants} from '../utils/contants';
 import user_auth_slice from './slices/user_auth_slice';
+import todos_slice from './slices/todos_slice';
 
 
 let reducers = combineReducers({
     user_auth: user_auth_slice,
-    // user_asset: user_assets_slice,
-    // user_transaction:user_transactions_slice,
-    // category:category_slice
+    todos_slice
     
 })
 

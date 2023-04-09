@@ -36,11 +36,6 @@ export const RouterApp = () => {
     <Container maxWidth={false}>
       <Router>
         <Routes>
-
-
-
-
-
           <Route element={<Private_Routes />}>
             <Route element={<Home />}   path='/' />
           </Route>
